@@ -28,8 +28,12 @@ public class Main {
                             System.out.println("3) Расчитать свои проценты");
                             byte writeChoseDeposit = sc.nextByte();
                             if (writeChoseDeposit == 1) {
+                                System.out.println("Введите количество ваших копилок: ");
+                                byte countMoneyBox = sc.nextByte();
                                 System.out.println("На инвестиции " + (investmentsOnUse = (writeMoney / 2)) + "₽");
-                                System.out.println("В копилки " + (moneyBox = ((writeMoney / 100) * 30)) + "₽");
+                                System.out.println("В ваши " + countMoneyBox + " копилку/копилки " +
+                                        (moneyBox = (((writeMoney / 100) * 30)) / countMoneyBox) + "₽");
+                                moneyBox *= countMoneyBox;
                                 System.out.println("В подушку " + (pillow = ((writeMoney / 100) * 10)) + "₽");
                                 System.out.println("На карманные расходы " + (pocketMoney = ((writeMoney / 100) * 10))
                                         + "₽");
@@ -39,15 +43,17 @@ public class Main {
                                 allPillow += pillow;
                                 allPocketMoney += pocketMoney;
                             } else if (writeChoseDeposit == 2) {
+                                System.out.println("Введите количество ваших копилок: ");
+                                byte countMoneyBox = sc.nextByte();
                                 System.out.println("На инвестиции " + (investmentsOnUse = (writeMoney / 2)) + "₽");
-                                System.out.println("В копилки " + (moneyBox = ((writeMoney / 100) * 40)) + "₽");
+                                System.out.println("В ваши " + countMoneyBox + " копилку/копилки " +
+                                        (moneyBox = (((writeMoney / 100) * 40)) / countMoneyBox) + "₽");
+                                moneyBox *= countMoneyBox;
                                 System.out.println("В подушку " + (pillow = ((writeMoney / 100) * 10)) + "₽");
                                 allMoney += writeMoney;
                                 allInvestments += (investmentsOnUse + investments);
                                 allMoneyBox += moneyBox;
                                 allPillow += pillow;
-                                System.out.println("Всего денег : " + allMoney + "₽");
-                                sc.nextLine();
                                 System.out.println("Всего денег : " + allMoney + "₽");
                             } else if (writeChoseDeposit == 3) {
                                 while (true) {
