@@ -4,14 +4,160 @@ import java.util.Map;
 import java.util.Scanner;
 
 public class Main {
+
+    public static User regOrLogIn(Scanner sc) {
+        Investments investments = new Investments();
+        User createUser = new User();
+        boolean flag = true;
+        String userNickname = "";
+        String userEmail = "";
+        String userPassword = "";
+        byte userInvestmentsPercent = 0;
+        byte userQuantityMoneyBox = 0;
+        byte userMoneyBoxPercent = 0;
+        byte userPillowPercent = 0;
+        byte userPocketMoney = 0;
+        int userAllMoney = 0;
+
+        System.out.println("Добро пожаловать! Это консольное приложение подскажет как правильно распреоделять твои " +
+                "деньги, ну или просто поможет удобнее распреоделять ваши деньги!\nЕсли у вас нет профиля напишите 1" +
+                ", если у вас уже есть профиль напишете 2");
+        while (flag) {
+            byte choseRegistration = sc.nextByte();
+            if (choseRegistration == 1) {
+                while (true) {
+                    try {
+                        System.out.println("Введите свой никнейм: ");
+                        userNickname = sc.nextLine();
+                        break;
+                    } catch (Exception e) {
+                        System.out.println(e);
+                    }
+                }
+                while (true) {
+                    try {
+                        System.out.println("Введите свой email: ");
+                        userEmail = sc.nextLine();
+                        break;
+                    } catch (Exception e) {
+                        System.out.println(e);
+                    }
+                }
+                while (true) {
+                    try {
+                        System.out.println("Введите свой пароль: ");
+                        userPassword = sc.nextLine();
+                        break;
+                    } catch (Exception e) {
+                        System.out.println(e);
+                    }
+                }
+                while (true) {
+                    try {
+                        System.out.println("Введите процент который вы бы хотели откладывать в инвестиции: ");
+                        userInvestmentsPercent = sc.nextByte();
+                        break;
+                    } catch (Exception e) {
+                        System.out.println(e);
+                    }
+                }
+                while (true) {
+                    try {
+                        System.out.println("Введите cколько у вас копилок: ");
+                        userQuantityMoneyBox = sc.nextByte();
+                        break;
+                    } catch (Exception e) {
+                        System.out.println(e);
+                    }
+                }
+                while (true) {
+                    try {
+                        System.out.println("Введите процент который вы бы хотели откладывать в копилки: ");
+                        userMoneyBoxPercent = sc.nextByte();
+                        break;
+                    } catch (Exception e) {
+                        System.out.println(e);
+                    }
+                }
+                while (true) {
+                    try {
+                        System.out.println("Введите процент который вы бы хотели откладывать в подушку: ");
+                        userPillowPercent = sc.nextByte();
+                        break;
+                    } catch (Exception e) {
+                        System.out.println(e);
+                    }
+                }
+                while (true) {
+                    try {
+                        System.out.println("Введите процент который вы бы хотели откладывать на корманные расходы: ");
+                        userPocketMoney = sc.nextByte();
+                        break;
+                    } catch (Exception e) {
+                        System.out.println(e);
+                    }
+                }
+                while (true) {
+                    try {
+                        System.out.println("Введите сколько у вас всего будет денег: ");
+                        userAllMoney = sc.nextInt();
+                        break;
+                    } catch (Exception e) {
+                        System.out.println(e);
+                    }
+                }
+                createUser = new User(userNickname, userEmail, userPassword, userInvestmentsPercent,
+                        userQuantityMoneyBox, userMoneyBoxPercent, userPillowPercent, userPocketMoney, userAllMoney);
+                investments.addUser(createUser);
+                flag = false;
+            } else if (choseRegistration == 2) {
+                while (true) {
+                    try {
+                        System.out.println("Напишите ваш никнейм: ");
+                        userNickname = sc.nextLine();
+                        break;
+                    } catch (Exception e) {
+                        System.out.println(e);
+                    }
+                }
+                while (true) {
+                    try {
+                        System.out.println("Напишите ваш email: ");
+                        userEmail = sc.nextLine();
+                        break;
+                    } catch (Exception e) {
+                        System.out.println(e);
+                    }
+                }
+                while (true) {
+                    try {
+                        System.out.println("Напишите ваш пароль: ");
+                        userPassword = sc.nextLine();
+                        break;
+                    } catch (Exception e) {
+                        System.out.println(e);
+                    }
+                }
+                createUser = new User(userNickname, userEmail, userPassword);
+                flag = false;
+            } else {
+                System.out.println("Выберите либо регистрацию нажав 1, либо авторизацию нажав 2");
+            }
+        }
+        return createUser;
+    }
+
     public static void main(String[] args) {
+        Investments investmentsClass = new Investments();
+        Scanner sc = new Scanner(System.in);
+        User createUser = regOrLogIn(sc);
         boolean flag = true;
         double allMoney = 0, investmentsOnUse = 0, investments = 0, moneyBox = 0, pillow = 0, pocketMoney = 0;
         double allInvestments = 0, allMoneyBox = 0, allPillow = 0, allPocketMoney = 0;
-        System.out.println("Добро пожаловать! Что хотите сделать?");
+
+
         while (true) {
             System.out.println("1) Произвести расчёт депозита. 2) Узнать общее количество денег.");
-            Scanner sc = new Scanner(System.in);
             try {
                 byte writeChose = sc.nextByte();
                 if (writeChose != 1 && writeChose != 2) {
