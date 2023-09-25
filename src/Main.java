@@ -9,6 +9,7 @@ public class Main {
         Investments investments = new Investments();
         User createUser = new User();
         boolean flag = true;
+        boolean flag1 = true;
         String userNickname = "";
         String userEmail = "";
         String userPassword = "";
@@ -16,7 +17,8 @@ public class Main {
         byte userQuantityMoneyBox = 0;
         byte userMoneyBoxPercent = 0;
         byte userPillowPercent = 0;
-        byte userPocketMoney = 0;
+        byte userPocketMoneyPercent = 0;
+        byte allPercent = 0;
         int userAllMoney = 0;
 
         System.out.println("Добро пожаловать! Это консольное приложение подскажет как правильно распреоделять твои " +
@@ -52,62 +54,75 @@ public class Main {
                         System.out.println(e);
                     }
                 }
-                while (true) {
-                    try {
-                        System.out.println("Введите процент который вы бы хотели откладывать в инвестиции: ");
-                        userInvestmentsPercent = sc.nextByte();
-                        break;
-                    } catch (Exception e) {
-                        System.out.println(e);
+                while (flag1) {
+                    while (true) {
+                        try {
+                            System.out.println("Введите процент который вы бы хотели откладывать в инвестиции: ");
+                            userInvestmentsPercent = sc.nextByte();
+                            allPercent += userInvestmentsPercent;
+                            break;
+                        } catch (Exception e) {
+                            System.out.println("Нужно ввести число!");
+                        }
                     }
-                }
-                while (true) {
-                    try {
-                        System.out.println("Введите cколько у вас копилок: ");
-                        userQuantityMoneyBox = sc.nextByte();
-                        break;
-                    } catch (Exception e) {
-                        System.out.println(e);
+                    while (true) {
+                        try {
+                            System.out.println("Введите cколько у вас копилок: ");
+                            userQuantityMoneyBox = sc.nextByte();
+                            break;
+                        } catch (Exception e) {
+                            System.out.println("Нужно ввести число!");
+                        }
                     }
-                }
-                while (true) {
-                    try {
-                        System.out.println("Введите процент который вы бы хотели откладывать в копилки: ");
-                        userMoneyBoxPercent = sc.nextByte();
-                        break;
-                    } catch (Exception e) {
-                        System.out.println(e);
+                    while (true) {
+                        try {
+                            System.out.println("Введите процент который вы бы хотели откладывать в копилки: ");
+                            userMoneyBoxPercent = sc.nextByte();
+                            allPercent += userMoneyBoxPercent;
+                            break;
+                        } catch (Exception e) {
+                            System.out.println("Нужно ввести число!");
+                        }
                     }
-                }
-                while (true) {
-                    try {
-                        System.out.println("Введите процент который вы бы хотели откладывать в подушку: ");
-                        userPillowPercent = sc.nextByte();
-                        break;
-                    } catch (Exception e) {
-                        System.out.println(e);
+                    while (true) {
+                        try {
+                            System.out.println("Введите процент который вы бы хотели откладывать в подушку: ");
+                            userPillowPercent = sc.nextByte();
+                            allPercent += userPillowPercent;
+                            break;
+                        } catch (Exception e) {
+                            System.out.println("Нужно ввести число!");
+                        }
                     }
-                }
-                while (true) {
-                    try {
-                        System.out.println("Введите процент который вы бы хотели откладывать на корманные расходы: ");
-                        userPocketMoney = sc.nextByte();
-                        break;
-                    } catch (Exception e) {
-                        System.out.println(e);
+                    while (true) {
+                        try {
+                            System.out.println("Введите процент который вы бы хотели откладывать на корманные расходы: ");
+                            userPocketMoneyPercent = sc.nextByte();
+                            allPercent += userPocketMoneyPercent;
+                            break;
+                        } catch (Exception e) {
+                            System.out.println("Нужно ввести число!");
+                        }
                     }
-                }
-                while (true) {
-                    try {
-                        System.out.println("Введите сколько у вас всего будет денег: ");
-                        userAllMoney = sc.nextInt();
-                        break;
-                    } catch (Exception e) {
-                        System.out.println(e);
+                    while (true) {
+                        try {
+                            System.out.println("Введите сколько у вас всего будет денег: ");
+                            userAllMoney = sc.nextInt();
+                            break;
+                        } catch (Exception e) {
+                            System.out.println("Нужно ввести число!");
+                        }
+                    }
+                    if (allPercent != 100) {
+                        flag1 = true;
+                        System.out.println("Общая сумма процентов должна получится 100!");
+                    } else {
+                        flag1 = false;
                     }
                 }
                 createUser = new User(userNickname, userEmail, userPassword, userInvestmentsPercent,
-                        userQuantityMoneyBox, userMoneyBoxPercent, userPillowPercent, userPocketMoney, userAllMoney);
+                        userQuantityMoneyBox, userMoneyBoxPercent, userPillowPercent, userPocketMoneyPercent,
+                        userAllMoney);
                 investments.addUser(createUser);
                 flag = false;
             } else if (choseRegistration == 2) {
@@ -146,6 +161,12 @@ public class Main {
         }
         return createUser;
     }
+
+    public static int budgetAllocation (User getUser) {
+
+        return 0;
+    }
+
 
     public static void main(String[] args) {
         Investments investmentsClass = new Investments();

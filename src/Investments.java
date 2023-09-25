@@ -10,4 +10,14 @@ public class Investments {
     public void addUser(User createUser) {
         usersArrayList.add(createUser);
     }
+
+    public User getUser(User getUserEmail) {
+        User user = new User();
+        for (int i = 0; i < usersArrayList.size(); i++) {
+            if (usersArrayList.get(i).equals(getUserEmail)) {
+
+            }
+        }
+        return null;
+    }
 }
