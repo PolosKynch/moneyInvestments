@@ -11,13 +11,28 @@ public class Investments {
         usersArrayList.add(createUser);
     }
 
-    public User getUser(User getUserEmail) {
-        User user = new User();
-        for (int i = 0; i < usersArrayList.size(); i++) {
-            if (usersArrayList.get(i).equals(getUserEmail)) {
+    public ArrayList<User> getUsersArrayList() {
+        return usersArrayList;
+    }
 
+
+    public User checkUser(String nickname, String password) {
+        for (User user: usersArrayList) {
+            if (user.getNickname().equals(nickname) && user.getPassword().equals(password)) {
+                return user;
             }
         }
         return null;
+    }
+
+    public User getUser(String nickname) {
+        int a = 0;
+        for (int i = 0; i < usersArrayList.size(); i++) {
+            if (usersArrayList.get(i).equals(nickname)) {
+                a = i;
+                break;
+            }
+        }
+        return usersArrayList.get(a);
     }
 }

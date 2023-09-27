@@ -5,27 +5,27 @@ import java.util.Scanner;
 
 public class Main {
 
-    public static User regOrLogIn(Scanner sc) {
-        Investments investments = new Investments();
+    public static User regOrLogIn(Scanner sc, Investments investments) {
         User createUser = new User();
         boolean flag = true;
         boolean flag1 = true;
         String userNickname = "";
         String userEmail = "";
         String userPassword = "";
-        byte userInvestmentsPercent = 0;
-        byte userQuantityMoneyBox = 0;
-        byte userMoneyBoxPercent = 0;
-        byte userPillowPercent = 0;
-        byte userPocketMoneyPercent = 0;
-        byte allPercent = 0;
+        int userInvestmentsPercent = 0;
+        int userQuantityMoneyBox = 0;
+        int userMoneyBoxPercent = 0;
+        int userPillowPercent = 0;
+        int userPocketMoneyPercent = 0;
+        int allPercent = 0;
         int userAllMoney = 0;
 
         System.out.println("Добро пожаловать! Это консольное приложение подскажет как правильно распреоделять твои " +
                 "деньги, ну или просто поможет удобнее распреоделять ваши деньги!\nЕсли у вас нет профиля напишите 1" +
                 ", если у вас уже есть профиль напишете 2");
         while (flag) {
-            byte choseRegistration = sc.nextByte();
+            int choseRegistration = sc.nextInt();
+            sc.nextLine();
             if (choseRegistration == 1) {
                 while (true) {
                     try {
@@ -45,6 +45,8 @@ public class Main {
                         System.out.println(e);
                     }
                 }
+                //Viktor.Sinitsyn@homecredit.ru
+                //ruslan.nevzorov@homecredit.ru
                 while (true) {
                     try {
                         System.out.println("Введите свой пароль: ");
@@ -58,59 +60,59 @@ public class Main {
                     while (true) {
                         try {
                             System.out.println("Введите процент который вы бы хотели откладывать в инвестиции: ");
-                            userInvestmentsPercent = sc.nextByte();
+                            userInvestmentsPercent = sc.nextInt();
                             allPercent += userInvestmentsPercent;
                             break;
-                        } catch (Exception e) {
-                            System.out.println("Нужно ввести число!");
+                        } catch (InputMismatchException e) {
+                            System.out.println("Вы ввели не число. Попробуйте ещё раз.");
                         }
                     }
                     while (true) {
                         try {
                             System.out.println("Введите cколько у вас копилок: ");
-                            userQuantityMoneyBox = sc.nextByte();
+                            userQuantityMoneyBox = sc.nextInt();
                             break;
-                        } catch (Exception e) {
-                            System.out.println("Нужно ввести число!");
+                        } catch (InputMismatchException e) {
+                            System.out.println("Вы ввели не число. Попробуйте ещё раз.");
                         }
                     }
                     while (true) {
                         try {
                             System.out.println("Введите процент который вы бы хотели откладывать в копилки: ");
-                            userMoneyBoxPercent = sc.nextByte();
+                            userMoneyBoxPercent = sc.nextInt();
                             allPercent += userMoneyBoxPercent;
                             break;
-                        } catch (Exception e) {
-                            System.out.println("Нужно ввести число!");
+                        } catch (InputMismatchException e) {
+                            System.out.println("Вы ввели не число. Попробуйте ещё раз.");
                         }
                     }
                     while (true) {
                         try {
                             System.out.println("Введите процент который вы бы хотели откладывать в подушку: ");
-                            userPillowPercent = sc.nextByte();
+                            userPillowPercent = sc.nextInt();
                             allPercent += userPillowPercent;
                             break;
-                        } catch (Exception e) {
-                            System.out.println("Нужно ввести число!");
+                        } catch (InputMismatchException e) {
+                            System.out.println("Вы ввели не число. Попробуйте ещё раз.");
                         }
                     }
                     while (true) {
                         try {
                             System.out.println("Введите процент который вы бы хотели откладывать на корманные расходы: ");
-                            userPocketMoneyPercent = sc.nextByte();
+                            userPocketMoneyPercent = sc.nextInt();
                             allPercent += userPocketMoneyPercent;
                             break;
-                        } catch (Exception e) {
-                            System.out.println("Нужно ввести число!");
+                        } catch (InputMismatchException e) {
+                            System.out.println("Вы ввели не число. Попробуйте ещё раз.");
                         }
                     }
                     while (true) {
                         try {
-                            System.out.println("Введите сколько у вас всего будет денег: ");
+                            System.out.println("Введите сколько у вас всего свободных денег в данный момент: ");
                             userAllMoney = sc.nextInt();
                             break;
-                        } catch (Exception e) {
-                            System.out.println("Нужно ввести число!");
+                        } catch (InputMismatchException e) {
+                            System.out.println("Вы ввели не число. Попробуйте ещё раз.");
                         }
                     }
                     if (allPercent != 100) {
@@ -135,15 +137,15 @@ public class Main {
                         System.out.println(e);
                     }
                 }
-                while (true) {
-                    try {
-                        System.out.println("Напишите ваш email: ");
-                        userEmail = sc.nextLine();
-                        break;
-                    } catch (Exception e) {
-                        System.out.println(e);
-                    }
-                }
+//                while (true) {
+//                    try {
+//                        System.out.println("Напишите ваш email: ");
+//                        userEmail = sc.nextLine();
+//                        break;
+//                    } catch (Exception e) {
+//                        System.out.println(e);
+//                    }
+//                }
                 while (true) {
                     try {
                         System.out.println("Напишите ваш пароль: ");
@@ -153,8 +155,10 @@ public class Main {
                         System.out.println(e);
                     }
                 }
-                createUser = new User(userNickname, userEmail, userPassword);
+
+                createUser = investments.checkUser(userNickname, userPassword);
                 flag = false;
+
             } else {
                 System.out.println("Выберите либо регистрацию нажав 1, либо авторизацию нажав 2");
             }
@@ -162,116 +166,137 @@ public class Main {
         return createUser;
     }
 
-    public static int budgetAllocation (User getUser) {
-
-        return 0;
+    public static void choseStrategy(Scanner sc, double allMoney, double investmentsOnUse, double investments, double
+            moneyBox, double pillow, double pocketMoney, double allInvestments, double allMoneyBox, double allPillow,
+                                     double allPocketMoney, double writeMoney, boolean flag) {
+        while (true) {
+            System.out.println("1) Инвестиции 50%, Копилки 30%, Подушка 10%, Карманные расходы 10%");
+            System.out.println("2) Инвестиции 50%, Копилки 40%, Подушка 10%");
+            System.out.println("3) Расчитать свои проценты");
+            byte writeChoseDeposit = sc.nextByte();
+            if (writeChoseDeposit == 1) {
+                System.out.println("Введите количество ваших копилок: ");
+                byte countMoneyBox = sc.nextByte();
+                System.out.println("На инвестиции " + (investmentsOnUse = (writeMoney / 2)) + "₽");
+                System.out.println("В ваши " + countMoneyBox + " копилку/копилки " +
+                        (moneyBox = (((writeMoney / 100) * 30)) / countMoneyBox) + "₽");
+                moneyBox *= countMoneyBox;
+                System.out.println("В подушку " + (pillow = ((writeMoney / 100) * 10)) + "₽");
+                System.out.println("На карманные расходы " + (pocketMoney = ((writeMoney / 100) * 10))
+                        + "₽");
+                allMoney += writeMoney;
+                allInvestments += (investmentsOnUse + investments);
+                allMoneyBox += moneyBox;
+                allPillow += pillow;
+                allPocketMoney += pocketMoney;
+            } else if (writeChoseDeposit == 2) {
+                System.out.println("Введите количество ваших копилок: ");
+                byte countMoneyBox = sc.nextByte();
+                System.out.println("На инвестиции " + (investmentsOnUse = (writeMoney / 2)) + "₽");
+                System.out.println("В ваши " + countMoneyBox + " копилку/копилки " +
+                        (moneyBox = (((writeMoney / 100) * 40)) / countMoneyBox) + "₽");
+                moneyBox *= countMoneyBox;
+                System.out.println("В подушку " + (pillow = ((writeMoney / 100) * 10)) + "₽");
+                allMoney += writeMoney;
+                allInvestments += (investmentsOnUse + investments);
+                allMoneyBox += moneyBox;
+                allPillow += pillow;
+                System.out.println("Всего денег : " + allMoney + "₽");
+            } else if (writeChoseDeposit == 3) {
+                while (true) {
+                    System.out.println("Напишите сколько процентов вы хотите вкладывать в инвестиции: ");
+                    byte chosePercentInvestments = sc.nextByte();
+                    System.out.println("Напишите сколько процентов вы хотите вкладывать в копилки:");
+                    byte chosePercentMoneyBox = sc.nextByte();
+                    System.out.println("Напишите сколько процентов вы хотите вкладывать в подушку:");
+                    byte chosePercentPillow = sc.nextByte();
+                    System.out.println("Напишите сколько процентов вы хотите оставить на карманные " +
+                            "расходы:");
+                    byte chosePercentPocketMoney = sc.nextByte();
+                    if (chosePercentInvestments + chosePercentPillow + chosePercentPocketMoney +
+                            chosePercentMoneyBox != 100) {
+                        System.out.println("Всего должно получиться 100 процентов!");
+                    } else {
+                        System.out.println("На инвестиции " + (investmentsOnUse = (writeMoney / 100 *
+                                chosePercentInvestments)) + "₽");
+                        System.out.println("В копилки " + (moneyBox = ((writeMoney / 100) *
+                                chosePercentMoneyBox)) + "₽");
+                        System.out.println("В подушку " + (pillow = ((writeMoney / 100) *
+                                chosePercentPillow)) + "₽");
+                        System.out.println("На карманные расходы " + (pocketMoney = ((writeMoney / 100) *
+                                chosePercentPocketMoney)) + "₽");
+                        allMoney += writeMoney;
+                        allInvestments += (investmentsOnUse + investments);
+                        allMoneyBox += moneyBox;
+                        allPillow += pillow;
+                        allPocketMoney += pocketMoney;
+                        System.out.println("Всего денег : " + allMoney + "₽");
+                    }
+                    System.out.println("Расчитать ещё раз? 1) Да. 2) Нет.");
+                    byte choseContinue = sc.nextByte();
+                    if (choseContinue == 1) {
+                        flag = false;
+                    } else {
+                        flag = true;
+                    }
+                    if (flag) {
+                        break;
+                    } else {
+                        continue;
+                    }
+                }
+            }
+            if (flag) {
+                break;
+            } else {
+                continue;
+            }
+        }
     }
 
 
     public static void main(String[] args) {
         Investments investmentsClass = new Investments();
         Scanner sc = new Scanner(System.in);
-        User createUser = regOrLogIn(sc);
+        User user = regOrLogIn(sc, investmentsClass);
         boolean flag = true;
+        // планирую заменить на HashMap
         double allMoney = 0, investmentsOnUse = 0, investments = 0, moneyBox = 0, pillow = 0, pocketMoney = 0;
         double allInvestments = 0, allMoneyBox = 0, allPillow = 0, allPocketMoney = 0;
 
+//        user = new User("Polos", "Egorb5162@gmail.com", "1234a", 10,
+//                1, 50, 10, 30, 1000000);
+        investmentsClass.addUser(user);
+
 
         while (true) {
-            System.out.println("1) Произвести расчёт депозита. 2) Узнать общее количество денег.");
+            System.out.println("1) Произвести расчёт депозита. 2) Узнать общее количество денег. 3) Вывести список " +
+                    "пользователей.");
             try {
                 byte writeChose = sc.nextByte();
-                if (writeChose != 1 && writeChose != 2) {
-                    System.out.println("Выберите 1 или 2!");
+                sc.nextLine();
+                if (writeChose != 1 && writeChose != 2 && writeChose != 3) {
+                    System.out.println("Выберите 1 или 2 или 3!");
                 }
                 switch (writeChose) {
                     case 1:
                         System.out.println("Введите сумму вложения: ");
                         double writeMoney = sc.nextDouble();
                         System.out.println("Выберите стратегию вложения:");
-                        while (true) {
-                            System.out.println("1) Инвестиции 50%, Копилки 30%, Подушка 10%, Карманные расходы 10%");
-                            System.out.println("2) Инвестиции 50%, Копилки 40%, Подушка 10%");
-                            System.out.println("3) Расчитать свои проценты");
-                            byte writeChoseDeposit = sc.nextByte();
-                            if (writeChoseDeposit == 1) {
-                                System.out.println("Введите количество ваших копилок: ");
-                                byte countMoneyBox = sc.nextByte();
-                                System.out.println("На инвестиции " + (investmentsOnUse = (writeMoney / 2)) + "₽");
-                                System.out.println("В ваши " + countMoneyBox + " копилку/копилки " +
-                                        (moneyBox = (((writeMoney / 100) * 30)) / countMoneyBox) + "₽");
-                                moneyBox *= countMoneyBox;
-                                System.out.println("В подушку " + (pillow = ((writeMoney / 100) * 10)) + "₽");
-                                System.out.println("На карманные расходы " + (pocketMoney = ((writeMoney / 100) * 10))
-                                        + "₽");
-                                allMoney += writeMoney;
-                                allInvestments += (investmentsOnUse + investments);
-                                allMoneyBox += moneyBox;
-                                allPillow += pillow;
-                                allPocketMoney += pocketMoney;
-                            } else if (writeChoseDeposit == 2) {
-                                System.out.println("Введите количество ваших копилок: ");
-                                byte countMoneyBox = sc.nextByte();
-                                System.out.println("На инвестиции " + (investmentsOnUse = (writeMoney / 2)) + "₽");
-                                System.out.println("В ваши " + countMoneyBox + " копилку/копилки " +
-                                        (moneyBox = (((writeMoney / 100) * 40)) / countMoneyBox) + "₽");
-                                moneyBox *= countMoneyBox;
-                                System.out.println("В подушку " + (pillow = ((writeMoney / 100) * 10)) + "₽");
-                                allMoney += writeMoney;
-                                allInvestments += (investmentsOnUse + investments);
-                                allMoneyBox += moneyBox;
-                                allPillow += pillow;
-                                System.out.println("Всего денег : " + allMoney + "₽");
-                            } else if (writeChoseDeposit == 3) {
-                                while (true) {
-                                    System.out.println("Напишите сколько процентов вы хотите вкладывать в инвестиции: ");
-                                    byte chosePercentInvestments = sc.nextByte();
-                                    System.out.println("Напишите сколько процентов вы хотите вкладывать в копилки:");
-                                    byte chosePercentMoneyBox = sc.nextByte();
-                                    System.out.println("Напишите сколько процентов вы хотите вкладывать в подушку:");
-                                    byte chosePercentPillow = sc.nextByte();
-                                    System.out.println("Напишите сколько процентов вы хотите оставить на карманные " +
-                                            "расходы:");
-                                    byte chosePercentPocketMoney = sc.nextByte();
-                                    if (chosePercentInvestments + chosePercentPillow + chosePercentPocketMoney +
-                                            chosePercentMoneyBox != 100) {
-                                        System.out.println("Всего должно получиться 100 процентов!");
-                                    } else {
-                                        System.out.println("На инвестиции " + (investmentsOnUse = (writeMoney / 100 *
-                                                chosePercentInvestments)) + "₽");
-                                        System.out.println("В копилки " + (moneyBox = ((writeMoney / 100) *
-                                                chosePercentMoneyBox)) + "₽");
-                                        System.out.println("В подушку " + (pillow = ((writeMoney / 100) *
-                                                chosePercentPillow)) + "₽");
-                                        System.out.println("На карманные расходы " + (pocketMoney = ((writeMoney / 100) *
-                                                chosePercentPocketMoney)) + "₽");
-                                        allMoney += writeMoney;
-                                        allInvestments += (investmentsOnUse + investments);
-                                        allMoneyBox += moneyBox;
-                                        allPillow += pillow;
-                                        allPocketMoney += pocketMoney;
-                                        System.out.println("Всего денег : " + allMoney + "₽");
-                                    }
-                                    System.out.println("Расчитать ещё раз? 1) Да. 2) Нет.");
-                                    byte choseContinue = sc.nextByte();
-                                    if (choseContinue == 1) {
-                                        flag = false;
-                                    } else {
-                                        flag = true;
-                                    }
-                                    if (flag) {
-                                        break;
-                                    } else {
-                                        continue;
-                                    }
-                                }
-                            }
-                            if (flag) {
-                                break;
-                            } else {
-                                continue;
-                            }
-                        }
+                        choseStrategy(sc, allMoney, investmentsOnUse, investments, moneyBox, pillow, pocketMoney,
+                                allInvestments, allMoneyBox, allPillow, allPocketMoney, writeMoney, flag); //
+                        break;
+
+                    case 3:
+                        System.out.println(investmentsClass.getUsersArrayList());
+                        break;
+
+                    case 4:
+                        System.out.println("Введите свой никнейм");
+                        String nickname = sc.nextLine();
+                        investmentsClass.getUser(nickname);
+                        System.out.println();
+
                         break;
 
                     case 2:
