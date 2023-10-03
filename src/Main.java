@@ -336,8 +336,8 @@ public class Main {
         if (writeChoseAnyCategory == 3) {
             System.out.println("Возвращаю вас к выбору!");
         } else if (writeChoseAnyCategory == 1) {
-            System.out.println("1) Инвестиции. 2) Копилка. 3) Подушка. 4) Карманные расходы. 5) Всё" +
-                    " сразу.");
+            System.out.println("1) Инвестиции. 2) Копилка. 3) Подушка. 4) Карманные расходы. 5) Арнеда квартиры 6) Всё"
+                    + " сразу.");
             byte writeChoseCategory = sc.nextByte();
             switch (writeChoseCategory) {
                 case 1:
@@ -353,10 +353,14 @@ public class Main {
                     System.out.println("В корманных расхдах: " + allVariables.get("allPocketMoney") + "₽");
                     break;
                 case 5:
+                    System.out.println("На аренду квартиры: " + allVariables.get("flat") + "₽");
+                    break;
+                case 6:
                     System.out.println("В инвестициях: " + (allVariables.get("allInvestments")) + "₽");
                     System.out.println("В копилке: " + allVariables.get("allMoneyBox") + "₽");
                     System.out.println("В подушке: " + allVariables.get("allPillow") + "₽");
                     System.out.println("На корманных расходах: " + allVariables.get("allPocketMoney") + "₽");
+                    System.out.println("На аренду квартиры: " + allVariables.get("flat") + "₽");
                     break;
             }
         } else if (writeChoseAnyCategory == 2) {
@@ -382,6 +386,8 @@ public class Main {
             allVariables.put("allPillow", sc.nextDouble());
             System.out.println("Напишите сколько денег у вас в корманных расходах: ");
             allVariables.put("allPocketMoney", sc.nextDouble());
+            System.out.println("Напишите сколько денег у вас на квартиру: ");
+            allVariables.put("flat", sc.nextDouble());
             System.out.println("Всего в инвестициях: " + allVariables.get("allInvestments"));
             for (Map.Entry<String, Double> entry : calledMoneyBoxMas.entrySet()) {
                 System.out.println(entry.getValue() + "₽., в копилке на " + entry.getKey());
@@ -389,8 +395,9 @@ public class Main {
             System.out.println("Всего в копилках: " + allVariables.get("allMoneyBox") + "₽");
             System.out.println("Всего в подушке: " + allVariables.get("allPillow") + "₽");
             System.out.println("Всего в корманных расходах: " + allVariables.get("allPocketMoney") + "₽");
+            System.out.println("Всего на аренду квартиру: " + allVariables.get("flat") + "₽");
             allVariables.put("allMoney", allVariables.get("allInvestments") + allVariables.get("allMoneyBox") +
-                    allVariables.get("allPillow") + allVariables.get("allPocketMoney"));
+                    allVariables.get("allPillow") + allVariables.get("allPocketMoney") + allVariables.get("flat"));
             System.out.println("Всего денег: " + allVariables.get("allMoney") + "₽");
         }
     }
